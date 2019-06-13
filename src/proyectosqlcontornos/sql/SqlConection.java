@@ -213,4 +213,112 @@ public class SqlConection {
 
         return contador;
     }
+    
+    /**
+     * Borra los datos de un club en particular.
+     *
+     * @param codClub
+     */
+    public boolean borrardatoClubPorCodigo(String codClub) {
+        boolean hecho = false;
+        try {
+
+            Connection connection = SqlConection.getInstance().getConexion();
+
+            Statement statement = connection.createStatement();
+            String aux = "delete from Club where codClub = '" + codClub + "';";
+            System.out.println("Borrado Club " + aux);
+            statement.executeUpdate(aux);
+
+            statement.close();
+            connection.close();
+            hecho = true;
+        } catch (SQLException ex) {
+            System.out.println(ex);
+
+        }
+        return hecho;
+    }
+
+    /**
+     * Borra los datos de un jugador en particular.
+     *
+     * @param codJugador
+     */
+    public boolean borrardatoJugadorPorCodigo(int codJugador) {
+        boolean hecho = false;
+        try {
+
+            Connection connection = SqlConection.getInstance().getConexion();
+
+            Statement statement = connection.createStatement();
+            String aux = "delete from Jugador where codJugador = '" + codJugador + "';";
+            System.out.println("Borrado Jugador " + aux);
+            statement.executeUpdate(aux);
+
+            statement.close();
+            connection.close();
+            hecho = true;
+        } catch (SQLException ex) {
+            System.out.println(ex);
+
+        }
+        return hecho;
+    }
+     /**
+     * Modifica los datos de un jugador en la base de datos.
+     *
+     * @param codJugador
+     */
+    public boolean modificarJugadorPorCodigo(int codJugador, String nombre, String codClub) {
+        boolean hecho = false;
+        try {
+
+            Connection connection = SqlConection.getInstance().getConexion();
+
+            Statement statement = connection.createStatement();
+            String aux = "update Jugadores set nombre='" + nombre + "',codClub='" + codClub + "' where codJugadores= " + codJugador + ";";
+            System.out.println("Modifica Jugador " + aux);
+            statement.executeUpdate(aux);
+
+            statement.close();
+            connection.close();
+            hecho = true;
+        } catch (SQLException ex) {
+            System.out.println(ex);
+
+        }
+        return hecho;
+    }
+
+    /**
+     * Modifica los datos de un club en la base de datos.
+     *
+     * @param codClub
+     */
+    public boolean modificarJugadorPorCodigo(String codClub, String nombre, String mote) {
+        boolean hecho = false;
+        try {
+
+            Connection connection = SqlConection.getInstance().getConexion();
+
+            Statement statement = connection.createStatement();
+            String aux = "update Club set nombre='" + nombre + "',mote='" + mote + "' where codClub= " + codClub + ";";
+            System.out.println("Modifica club " + aux);
+            statement.executeUpdate(aux);
+
+            statement.close();
+            connection.close();
+            hecho = true;
+        } catch (SQLException ex) {
+            System.out.println(ex);
+
+        }
+        return hecho;
+    }
+    
+    
+    
+    
+    
 }
