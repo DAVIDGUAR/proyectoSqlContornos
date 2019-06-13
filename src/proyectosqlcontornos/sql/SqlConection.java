@@ -25,5 +25,19 @@ public class SqlConection {
         return conexion;
     }
     
-    
+    /**
+     * Metodo que devuelve la instancia del objeto unico( uso el patron de
+     * diseño Singleton) para evitar multiples accesos simultaneos a la base de
+     * datos.
+     *
+     * @return
+     */
+    public static SqlConection getInstance() {
+        if (null == instancia) {
+            instancia = new SqlConection();
+
+        }
+        return instancia;
+
+    }
 }
