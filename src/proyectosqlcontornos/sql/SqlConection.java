@@ -91,4 +91,126 @@ public class SqlConection {
 
         return hecho;
     }
+    
+     /**
+     * Inserta las columnas de las tablas jugadores
+     *
+     * @param codJugador
+     * @param nombre
+     * @param codClub
+     * @return
+     */
+    public boolean insertarJugador(Integer codJugador, String nombre, String codClub) {
+        Boolean hecho = false;
+        try {
+
+            Connection connection = SqlConection.getInstance().getConexion();
+
+            Statement statement = connection.createStatement();
+            String aux = "insert into Jugadores  values(" + codJugador + ",'" + nombre + "','" + codClub + "');";
+            System.out.println("insertar jugador " + aux);
+            statement.executeUpdate(aux);
+
+            statement.close();
+            connection.close();
+            hecho = true;
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+            hecho = false;
+        }
+
+        return hecho;
+
+    }
+
+    /**
+     * Inserta las columnas de las tablas de club
+     *
+     * @param codClub
+     * @param nombre
+     * @param mote
+     * @return
+     */
+    public boolean insertarClub(String codClub, String nombre, String mote) {
+        Boolean hecho = false;
+        try {
+
+            Connection connection = SqlConection.getInstance().getConexion();
+
+            Statement statement = connection.createStatement();
+            String aux = "insert into Club values('" + codClub + "','" + nombre + "','" + mote + "');";
+            System.out.println("insert Club " + aux);
+            statement.executeUpdate(aux);
+
+            statement.close();
+            connection.close();
+            hecho = true;
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+            hecho = false;
+        }
+
+        return hecho;
+
+    }
+    
+    
+     /**
+     * Inserta las estructura de datos y los datos necesarios para comprobar la
+     * aplicacion
+     *
+     * @return
+     */
+    public int crearDatosPorDefecto() {
+        boolean hecho = false;
+        int contador = 0;
+        hecho = crearEstructuraDatos();
+        if (true == hecho) {
+            contador = contador + crearDatosPorDefectoClub();
+            contador = contador + crearDatosPorDefectoJugador();
+        }
+        return contador;
+    }
+
+    private int crearDatosPorDefectoClub() {
+
+        int contador = 0;
+
+        if (insertarClub("c1", "Barsa", "Polacos")) {
+            contador++;
+        }
+        if (insertarClub("c2", "Celta", "Portugueses")) {
+            contador++;
+        }
+        if (insertarClub("c3", "Madrid", "Merengues")) {
+            contador++;
+        }
+        if (insertarClub("c4", "Bilbao", "Leones")) {
+            contador++;
+        }
+
+        return contador;
+    }
+
+    private int crearDatosPorDefectoJugador() {
+
+        int contador = 0;
+
+        if (insertarJugador(1, "Messi", "c1")) {
+            contador++;
+        }
+        if (insertarJugador(2, "Aspas", "c2")) {
+            contador++;
+        }
+        if (insertarJugador(3, "Ramos", "c3")) {
+            contador++;
+        }
+        if (insertarJugador(4, "Munain", "c4")) {
+            contador++;
+        }
+
+        return contador;
+    }
 }
