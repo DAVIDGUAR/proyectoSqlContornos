@@ -28,7 +28,6 @@ public class SqlConection {
      * @return
      * @throws SQLException
      */
-
     public Connection getConexion() throws SQLException {
         Connection conexion = DriverManager.getConnection("jdbc:sqlite:database.db");
 
