@@ -1,7 +1,11 @@
 package proyectosqlcontornos.sql;
 
+/*
+ Librerias necesarias para nuestra aplicacion
+ */
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -14,22 +18,23 @@ import java.util.logging.Logger;
  * @author david
  */
 public class SqlConection {
-    
+
     private static SqlConection instancia = null;
-/**
+
+    /**
      * Conecta la base de datos con la aplicacion para poder configurarla y
      * diseñarla.
      *
      * @return
      * @throws SQLException
      */
-    
+
     public Connection getConexion() throws SQLException {
         Connection conexion = DriverManager.getConnection("jdbc:sqlite:database.db");
 
         return conexion;
     }
-    
+
     /**
      * Metodo que devuelve la instancia del objeto unico( uso el patron de
      * diseño Singleton) para evitar multiples accesos simultaneos a la base de
@@ -45,7 +50,7 @@ public class SqlConection {
         return instancia;
 
     }
-    
+
     /**
      * Crea las estructuras de datos necesarias para el programa
      *
@@ -93,8 +98,8 @@ public class SqlConection {
 
         return hecho;
     }
-    
-     /**
+
+    /**
      * Inserta las columnas de las tablas jugadores
      *
      * @param codJugador
@@ -157,9 +162,8 @@ public class SqlConection {
         return hecho;
 
     }
-    
-    
-     /**
+
+    /**
      * Inserta las estructura de datos y los datos necesarios para comprobar la
      * aplicacion
      *
@@ -215,7 +219,7 @@ public class SqlConection {
 
         return contador;
     }
-    
+
     /**
      * Borra los datos de un club en particular.
      *
@@ -267,7 +271,8 @@ public class SqlConection {
         }
         return hecho;
     }
-     /**
+
+    /**
      * Modifica los datos de un jugador en la base de datos.
      *
      * @param codJugador
@@ -318,8 +323,7 @@ public class SqlConection {
         }
         return hecho;
     }
-    
-    
+
     /**
      * Metodo que recupera los datos jugadores y los mete en un arraylist para
      * poder utilizarlos despues.
@@ -395,6 +399,5 @@ public class SqlConection {
         return auxArrlist;
 
     }
-    
-    
+
 }
