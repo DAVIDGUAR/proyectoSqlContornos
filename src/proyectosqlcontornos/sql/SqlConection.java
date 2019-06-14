@@ -2,8 +2,10 @@ package proyectosqlcontornos.sql;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -318,7 +320,81 @@ public class SqlConection {
     }
     
     
-    
+    /**
+     * Metodo que recupera los datos jugadores y los mete en un arraylist para
+     * poder utilizarlos despues.
+     *
+     * @return
+     */
+    public ArrayList<String[]> ConseguirJugadores() {
+        ArrayList<String[]> auxArrlist = new ArrayList<String[]>();
+
+        try {
+            Connection conexion = SqlConection.getInstance().getConexion();
+            String consulta = "select codJugadores,Jugadores.Nombre,Club.Nombre from jugadores,club where Jugadores.codClub = Club.codClub ;";
+            Statement statement = conexion.createStatement();
+
+            System.out.println(consulta);
+            ResultSet rs = statement.executeQuery(consulta);
+
+            while (rs.next()) {
+                String[] aux = new String[3];
+                aux[0] = rs.getString(1);
+                aux[1] = rs.getString(2);
+                aux[2] = rs.getString(3);
+
+                auxArrlist.add(aux);
+
+            }
+            rs.close();
+            statement.close();
+            conexion.close();
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+
+        }
+        return auxArrlist;
+
+    }
+
+    /**
+     * Metodo que recupera los datos clubs y los mete en un arraylist para poder
+     * utilizarlos despues.
+     *
+     * @return
+     */
+    public ArrayList<String[]> ConseguirClub() {
+        ArrayList<String[]> auxArrlist = new ArrayList<String[]>();
+
+        try {
+            Connection conexion = SqlConection.getInstance().getConexion();
+            String consulta = "select codClub,Nombre,mote from club;";
+            Statement statement = conexion.createStatement();
+
+            System.out.println(consulta);
+            ResultSet rs = statement.executeQuery(consulta);
+
+            while (rs.next()) {
+                String[] aux = new String[3];
+                aux[0] = rs.getString(1);
+                aux[1] = rs.getString(2);
+                aux[2] = rs.getString(3);
+
+                auxArrlist.add(aux);
+
+            }
+            rs.close();
+            statement.close();
+            conexion.close();
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+
+        }
+        return auxArrlist;
+
+    }
     
     
 }
