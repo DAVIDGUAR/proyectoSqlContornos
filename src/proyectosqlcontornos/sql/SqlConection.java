@@ -55,9 +55,9 @@ public class SqlConection {
      *
      * @return
      */
-    private Boolean crearEstructuraDatos() {
+    private boolean crearEstructuraDatos() {
 
-        Boolean hecho = false;
+        boolean hecho = false;
 
         // consigo la conexion 
         Connection connection;
